@@ -37,6 +37,6 @@ typings
 # System Files
 .DS_Store
 Thumbs.db
-./backend/public
+.public
 
 .env
