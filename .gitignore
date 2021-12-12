@@ -38,3 +38,5 @@ typings
 .DS_Store
 Thumbs.db
 ./backend/public
+
+.env
