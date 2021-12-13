@@ -7,9 +7,12 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { AuthService } from './services/auth.service';
+import { LocalstorageService } from './services/localstorage.service';
+import { UsersService } from './services/users.service';
 
 const routes:Routes=[
-  {path:'Login',component:LoginComponent}
+  {path:'login',component:LoginComponent}
 ];
 
 @NgModule({
@@ -21,6 +24,11 @@ const routes:Routes=[
     ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
-  declarations: [LoginComponent]
+  declarations: [LoginComponent],
+  providers:[
+    AuthService,
+    LocalstorageService,
+    UsersService
+  ]
 })
 export class UsersModule {}

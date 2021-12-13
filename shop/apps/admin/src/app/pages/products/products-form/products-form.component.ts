@@ -60,7 +60,7 @@ export class ProductsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `Product ${product.name} is created!`
+          detail: `Producto ${product.name}`
         });
         timer(2000)
           .toPromise()
@@ -72,7 +72,7 @@ export class ProductsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Product is not created!'
+          detail: 'Producto no creado!'
         });
       }
     );
@@ -84,7 +84,7 @@ export class ProductsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: 'Product is updated!'
+          detail: 'Producto actualizado!'
         });
         timer(2000)
           .toPromise()
@@ -96,7 +96,7 @@ export class ProductsFormComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Product is not updated!'
+          detail: 'Producto no actualizado!'
         });
       }
     );

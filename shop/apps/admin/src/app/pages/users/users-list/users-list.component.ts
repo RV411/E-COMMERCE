@@ -24,8 +24,8 @@ export class UsersListComponent implements OnInit {
 
   deleteUser(userId: string) {
     this.confirmationService.confirm({
-      message: 'Do you want to Delete this User?',
-      header: 'Delete User',
+      message: 'Eliminaras el usuario seleccionado',
+      header: 'Eliminar usuario',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.usersService.deleteUser(userId).subscribe(
@@ -34,14 +34,14 @@ export class UsersListComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: 'User is deleted!'
+              detail: 'Usuario eliminado'
             });
           },
           () => {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: 'User is not deleted!'
+              detail: 'Usuario no eliminado'
             });
           }
         );

@@ -34,8 +34,8 @@ export class ProductsListComponent implements OnInit {
 
   deleteProduct(productId: string) {
     this.confirmationService.confirm({
-      message: 'Do you want to delete this Product?',
-      header: 'Delete Product',
+      message: 'Eliminaras el producto seleccionado',
+      header: 'Eliminar producto',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.productsService.deleteProduct(productId).subscribe(
@@ -44,14 +44,14 @@ export class ProductsListComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: 'Product is deleted!'
+              detail: 'Producto eliminado'
             });
           },
           () => {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: 'Product is not deleted!'
+              detail: 'Producto no eliminado'
             });
           }
         );

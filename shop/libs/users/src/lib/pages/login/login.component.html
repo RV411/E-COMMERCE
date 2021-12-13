@@ -2,11 +2,11 @@
     <div class="login-register-panel">
       <div class="p-grid">
         <div class="p-col-6">
-          <img src="/shop/apps/admin/src/assets/images/login-photo.png" />
+          <img src="assets/images/login-photo.png" />
         </div>
         <div class="p-col-6 p-p-5">
-          <h3>Welcome!</h3>
-          <h2>Login Page</h2>
+          <h3>BIENVENIDOS!</h3>
+          <h2>Login</h2>
           <form [formGroup]="loginFormGroup">
             <div class="p-grid p-mt-6">
               <div class="p-col-12">
@@ -15,7 +15,7 @@
                   <input type="text" formControlName="email" pInputText placeholder="Email" />
                 </div>
                 <small *ngIf="loginForm.email.invalid && isSubmitted" class="p-error"
-                  ><span *ngIf="loginForm.email.errors.required">email is required</span>
+                  ><span *ngIf="loginForm.email.errors.required">Se requiere email</span>
                   <span *ngIf="loginForm.email.errors.email">email is invalid</span></small
                 >
               </div>
@@ -26,11 +26,10 @@
                     type="password"
                     formControlName="password"
                     pInputText
-                    placeholder="Password"
-                  />
+                    placeholder="Password"/>
                 </div>
                 <small *ngIf="loginForm.password.invalid && isSubmitted" class="p-error"
-                  >Password is required
+                  >Se requiere contraseña
                 </small>
               </div>
               <div class="p-col-12">
@@ -44,5 +43,5 @@
         </div>
       </div>
     </div>
-  </div>
-  
+
+</div>

@@ -51,14 +51,14 @@ export class OrdersDetailComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: 'Order is updated!'
+          detail: 'Se actualizo la orden!'
         });
       },
       () => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Order is not updated!'
+          detail: 'No se actualizo la orden!'
         });
       }
     );

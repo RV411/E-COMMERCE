@@ -1,8 +1,8 @@
-<p-toast></p-toast>
+<p-toast position="center"></p-toast>
 <div class="admin-page">
   <p-card
-    [header]="editmode ? 'Edit Category' : 'Add Category'"
-    subheader="You can add or edit categories here"
+    [header]="editmode ? 'EDITAR CATEGORIA' : 'AÑADIR CATEGORIA'"
+    subheader="Añade la categoria"
   >
     <div class="p-grid p-mb-5">
       <div class="p-col-12">
@@ -11,13 +11,13 @@
           <div class="p-toolbar-group-right">
             <p-button
               styleClass="p-button-primary p-mr-2"
-              [label]="editmode ? 'Update' : 'Create'"
+              [label]="editmode ? 'ACTUALIZAR' : 'CREAR'"
               icon="pi pi-plus"
               (click)="onSubmit()"
             ></p-button>
             <p-button
               styleClass="p-button-secondary"
-              label="Cancle"
+              label="CANCELAR"
               icon="pi pi-arrow-circle-left"
               (click)="onCancle()"
             ></p-button>
@@ -30,18 +30,14 @@
         <form [formGroup]="form">
           <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
-              <label for="name">Name</label>
+              <label for="name">Nombre</label>
               <input formControlName="name" id="name" type="text" pInputText />
-              <small *ngIf="categoryForm.name.invalid && isSubmitted" class="p-error"
-                >Name is required</small
-              >
+              <small *ngIf="categoryForm.name.invalid && isSubmitted" class="p-error">Nombre requerido</small>
             </div>
             <div class="p-field p-col">
               <label for="icon">Icon</label>
               <input formControlName="icon" id="icon" type="text" pInputText />
-              <small *ngIf="categoryForm.icon.invalid && isSubmitted" class="p-error"
-                >Icon is required</small
-              >
+              <small *ngIf="categoryForm.icon.invalid && isSubmitted" class="p-error">Icono requerido</small>
             </div>
             <div class="p-field p-col">
               <label for="color">Color</label><br />

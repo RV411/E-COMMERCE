@@ -1,13 +1,13 @@
-<p-toast></p-toast>
+<p-toast position="center"></p-toast>
 <div class="admin-page">
-  <p-card header="Products" subheader="List of all products">
+  <p-card header="PRODUCTOS" subheader="LISTA DE PRODUCTOS">
     <div class="p-grid">
       <div class="p-col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left">
             <p-button
               styleClass="p-button-success"
-              label="New"
+              label="CREAR"
               icon="pi pi-plus"
               routerLink="form"
             ></p-button>
@@ -26,17 +26,18 @@
         >
           <ng-template pTemplate="header">
             <tr>
-              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-              <th>Image</th>
-              <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-              <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
+              <th pSortableColumn="name">NOMBRE <p-sortIcon field="name"></p-sortIcon></th>
+              <th>IMAGEN</th>
+              <th pSortableColumn="price">PRICE <p-sortIcon field="price"></p-sortIcon></th>
+              <th pSortableColumn="stock">ALMACEN <p-sortIcon field="stock"></p-sortIcon></th>
               <th pSortableColumn="category">
-                Category <p-sortIcon field="category"></p-sortIcon>
+                CATEGORIA <p-sortIcon field="category"></p-sortIcon>
               </th>
               <th pSortableColumn="created">
-                Created at <p-sortIcon field="created"></p-sortIcon>
+                CREADO<p-sortIcon field="created"></p-sortIcon>
               </th>
-              <th></th>
+              <th>ELIMINAR</th>
+              <th>EDITAR</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-product>
@@ -53,6 +54,8 @@
                   styleClass="p-button-danger p-mr-2"
                   icon="pi pi-trash"
                 ></p-button>
+              </td>
+              <td>                
                 <p-button
                   (click)="updateProduct(product.id)"
                   styleClass="p-button-success"

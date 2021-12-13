@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
@@ -37,7 +37,7 @@ import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detai
 
 import { CategoriesService,ProductsService } from '@bluebits/products';
 import { OrdersService } from '@bluebits/orders';
-import { UsersService,UsersModule } from '@bluebits/users';
+import { UsersService,UsersModule,JwtInterceptor ,AuthGuard,AuthService,LocalstorageService} from '@bluebits/users';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 
@@ -64,6 +64,7 @@ const routes: Routes = [
   {
     path: '',
     component: ShellComponent,
+    canActivate: [AuthGuard],
     children: [
       {path: 'dashboard',component: DashboardComponent},
       {path: 'categories',component: CategoriesListComponent},
@@ -77,6 +78,7 @@ const routes: Routes = [
       {path: 'users/form/:id',component: UsersFormComponent},
       {path: 'orders',component: OrdersListComponent},
       {path: 'orders/:id',component: OrdersDetailComponent},
+
     ]
   }
 ];
@@ -111,8 +113,12 @@ const routes: Routes = [
     ProductsService,
     OrdersService,
     UsersService,
+    AuthService,
+    LocalstorageService,
     MessageService, 
-    ConfirmationService
+    ConfirmationService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent]
 })

@@ -1,20 +1,21 @@
-<p-toast></p-toast>
+<p-toast position="center"></p-toast>
 <div class="admin-page">
-  <p-card header="Orders" subheader="List of all orders">
+  <p-card header="ORDENES" subheader="LISTA DE ORDENES">
     <div class="p-grid">
       <div class="p-col-12">
         <p-table [value]="orders" styleClass="p-datatable-gridlines">
           <ng-template pTemplate="header">
             <tr>
-              <th pSortableColumn="name">User <p-sortIcon field="user"></p-sortIcon></th>
+              <th pSortableColumn="name">USUARIO <p-sortIcon field="user"></p-sortIcon></th>
               <th pSortableColumn="totalPrice">
-                Total Price <p-sortIcon field="totalPrice"></p-sortIcon>
+                Total<p-sortIcon field="totalPrice"></p-sortIcon>
               </th>
               <th pSortableColumn="dateOrdered">
-                Date Ordered <p-sortIcon field="dateOrdered"></p-sortIcon>
+                FECHA<p-sortIcon field="dateOrdered"></p-sortIcon>
               </th>
-              <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
-              <th></th>
+              <th pSortableColumn="status">ESTADO<p-sortIcon field="status"></p-sortIcon></th>
+              <th>ELIMINAR</th>
+              <th>EDITAR</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-order>
@@ -34,6 +35,8 @@
                   styleClass="p-button-danger p-mr-2"
                   icon="pi pi-trash"
                 ></p-button>
+              </td>
+              <td>                  
                 <p-button
                   (click)="showOrder(order.id)"
                   styleClass="p-button-success"
