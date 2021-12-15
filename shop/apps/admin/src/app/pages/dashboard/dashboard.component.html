@@ -1,1 +1,51 @@
-<p>dashboard works!</p>
+<div class="admin-page" *ngIf="dashboardValores.length">
+    <p-card header="DASHBOARD" subheader="Ultimos Datos">
+      <div class="p-grid">
+        <div class="p-col-3">
+          <p-card styleClass="d-orders">
+            <div class="d-item">
+              <div>
+                <i class="pi pi-shopping-cart"></i><br />
+                <span class="name">ORDENES</span>
+              </div>
+              <span class="number">{{ dashboardValores[0] }}</span>
+            </div>
+          </p-card>
+        </div>
+        <div class="p-col-3">
+          <p-card styleClass="d-products">
+            <div class="d-item">
+              <div>
+                <i class="pi pi-briefcase"></i><br />
+                <span class="name">PRODUCTOS</span>
+              </div>
+              <span class="number">{{ dashboardValores[1] }}</span>
+            </div>
+          </p-card>
+        </div>
+        <div class="p-col-3">
+          <p-card styleClass="d-users">
+            <div class="d-item">
+              <div>
+                <i class="pi pi-users"></i><br />
+                <span class="name">USUARIOS</span>
+              </div>
+              <span class="number">{{ dashboardValores[2] }}</span>
+            </div>
+          </p-card>
+        </div>
+        <div class="p-col-3">
+          <p-card styleClass="d-totalsales">
+            <div class="d-item">
+              <div>
+                <i class="pi pi-dollar"></i><br />
+                <span class="name">VENTAS TOTALES</span>
+              </div>
+              <span class="number">{{ dashboardValores[3] | currency }}</span>
+            </div>
+          </p-card>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  

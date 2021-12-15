@@ -137,7 +137,8 @@ export class UsersFormComponent implements OnInit {
       apartment: this.userForm.apartment.value,
       zip: this.userForm.zip.value,
       city: this.userForm.city.value,
-      country: this.userForm.country.value
+      country: this.userForm.country.value,
+      password: this.userForm.password.value,
     };
     if (this.editmode) {
       this._updateUser(user);

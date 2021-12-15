@@ -13,6 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
     const isAPIUrl = request.url.startsWith(environment.apiUrl);
 
     if (token && isAPIUrl) {
+      //pasar la autorizacion en cada peticion
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`

@@ -12,7 +12,7 @@ import { LocalstorageService } from './localstorage.service';
 
 
 export class AuthService {
-  apiURLUsers = environment.apiUrl + 'users';
+  apiURLUsers = environment.apiUrl + 'user';
 
   constructor(
     private http: HttpClient,
@@ -21,7 +21,7 @@ export class AuthService {
   ) {}
 
   login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`${this.apiURLUsers}/login`, { email, password });
+    return this.http.post<User>(`${this.apiURLUsers}/login`, { email:email, password:password });
   }
 
   logout() {
