@@ -1,22 +1,22 @@
 export const ORDER_STATUS = {
   0: {
-    label: 'PENDIENTE',
+    label: 'Pending',
     color: 'primary'
   },
   1: {
-    label: 'PROCESANDO',
+    label: 'Processed',
     color: 'warning'
   },
   2: {
-    label: 'EN VIAJE',
+    label: 'Shipped',
     color: 'warning'
   },
   3: {
-    label: 'ENTREGADO',
+    label: 'Delivered',
     color: 'success'
   },
   4: {
-    label: 'FALLO',
+    label: 'Failed',
     color: 'danger'
   }
 };

@@ -4,7 +4,6 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -37,8 +36,9 @@ import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detai
 
 import { CategoriesService,ProductsService } from '@bluebits/products';
 import { OrdersService } from '@bluebits/orders';
-import { UsersService,UsersModule,JwtInterceptor ,AuthGuard,AuthService,LocalstorageService} from '@bluebits/users';
+import { UsersService,UsersModule,JwtInterceptor ,AuthService,LocalstorageService} from '@bluebits/users';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { AppRoutingModule } from './app-routing.module';
 
 
 const UX_MODULE = [
@@ -60,28 +60,7 @@ const UX_MODULE = [
   ToolbarModule,
 ];
 
-const routes: Routes = [
-  {
-    path: '',
-    component: ShellComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {path: 'dashboard',component: DashboardComponent},
-      {path: 'categories',component: CategoriesListComponent},
-      {path: 'categories/form',component: CategoriesFormComponent},
-      {path: 'categories/form/:id',component: CategoriesFormComponent},
-      {path: 'products',component: ProductsListComponent},
-      {path: 'products/form',component: ProductsFormComponent},
-      {path: 'products/form/:id',component: ProductsFormComponent},
-      {path: 'users',component: UsersListComponent},
-      {path: 'users/form',component: UsersFormComponent},
-      {path: 'users/form/:id',component: UsersFormComponent},
-      {path: 'orders',component: OrdersListComponent},
-      {path: 'orders/:id',component: OrdersDetailComponent},
 
-    ]
-  }
-];
 
 @NgModule({
   declarations: [
@@ -99,12 +78,12 @@ const routes: Routes = [
     OrdersDetailComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     UsersModule,
     ...UX_MODULE
   ],

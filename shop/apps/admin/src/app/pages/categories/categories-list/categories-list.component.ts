@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@bluebits/products';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'admin-categories-list',
   templateUrl: './categories-list.component.html',
   styles: []
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
+  endsubs$: Subject<any> = new Subject();
 
   constructor(
     private categoriesService: CategoriesService,
@@ -21,13 +24,20 @@ export class CategoriesListComponent implements OnInit {
     this._getCategories();
   }
 
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
+  }
+
   deleteCategory(categoryId: string) {
     this.confirmationService.confirm({
       message: 'Eliminaras la categoria seleccionada',
       header: 'Eliminar categoria',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.categoriesService.deleteCategory(categoryId).subscribe(
+        this.categoriesService.deleteCategory(categoryId)
+        .pipe(takeUntil(this.endsubs$))    
+        .subscribe(
           () => {
             this._getCategories();
             this.messageService.add({
@@ -53,7 +63,9 @@ export class CategoriesListComponent implements OnInit {
   }
 
   private _getCategories() {
-    this.categoriesService.getCategories().subscribe((cats) => {
+    this.categoriesService.getCategories()
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe((cats) => {
       this.categories = cats;
     });
   }

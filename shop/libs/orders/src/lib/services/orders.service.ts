@@ -9,7 +9,7 @@ import { environment } from '@env/environment';
   providedIn: 'root'
 })
 export class OrdersService {
-  apiURLOrders = environment.apiUrl + 'orders';
+  apiURLOrders = environment.apiUrl + 'order';
 
   constructor(private http: HttpClient) {}
 

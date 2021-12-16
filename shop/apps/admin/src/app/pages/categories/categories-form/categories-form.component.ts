@@ -1,21 +1,24 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Category } from '@bluebits/products';
 import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
+import { Subject, timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'admin-categories-form',
   templateUrl: './categories-form.component.html',
   styles: []
 })
-export class CategoriesFormComponent implements OnInit {
+export class CategoriesFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   isSubmitted = false;
   editmode = false;
   currentCategoryId: string;
+  endsubs$: Subject<any> = new Subject();
+
 
   constructor(
     private messageService: MessageService,
@@ -33,6 +36,11 @@ export class CategoriesFormComponent implements OnInit {
     });
 
     this._checkEditMode();
+  }
+
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
   }
 
   onSubmit() {
@@ -58,7 +66,9 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _addCategory(category: Category) {
-    this.categoriesService.createCategory(category).subscribe(
+    this.categoriesService.createCategory(category)
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe(
       (category: Category) => {
         this.messageService.add({
           severity: 'success',
@@ -82,7 +92,9 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _updateCategory(category: Category) {
-    this.categoriesService.updateCategory(category).subscribe(
+    this.categoriesService.updateCategory(category)
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe(
       () => {
         this.messageService.add({
           severity: 'success',
@@ -106,11 +118,15 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _checkEditMode() {
-    this.route.params.subscribe((params) => {
+    this.route.params
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe((params) => {
       if (params.id) {
         this.editmode = true;
         this.currentCategoryId = params.id;
-        this.categoriesService.getCategory(params.id).subscribe((category) => {
+        this.categoriesService.getCategory(params.id)
+        .pipe(takeUntil(this.endsubs$))        
+        .subscribe((category) => {
           this.categoryForm.name.setValue(category.name);
           this.categoryForm.icon.setValue(category.icon);
           this.categoryForm.color.setValue(category.color);
