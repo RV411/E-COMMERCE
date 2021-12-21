@@ -15,7 +15,7 @@ router.get('/:id',async(req,res)=>{
     const category=await Category.findById(req.params.id);
 
     if(!category){
-        res.status(500).json({message:'La categoria con el IF no fue encontrada'});
+        res.status(500).json({message:'La categoria con el ID no fue encontrada'});
     }
     res.status(200).send(category);  
 })
