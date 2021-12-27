@@ -14,7 +14,12 @@ import { UiModuleModule } from '@bluebits/ui';
 
 
 import { AccordionModule } from 'primeng/accordion';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+
+
 import { NavComponent } from './shared/nav/nav.component';
+import { MessagesComponent } from './shared/messages/messages.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent }
@@ -27,6 +32,7 @@ const routes: Routes = [
     HeaderComponent,
     HomePageComponent,
     NavComponent,
+    MessagesComponent
   ],
   imports: [
     AccordionModule,
@@ -37,8 +43,9 @@ const routes: Routes = [
     ProductsModule,
     RouterModule.forRoot(routes),
     UiModuleModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

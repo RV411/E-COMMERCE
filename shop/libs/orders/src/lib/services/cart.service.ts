@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Cart, CartItem } from '../models/cart';
 
 export const CART_KEY='cart';
@@ -8,19 +9,67 @@ export const CART_KEY='cart';
 })
 
 export class CartService {
+  cart$: BehaviorSubject<Cart> = new BehaviorSubject(this.getCart());
 
   constructor() { }
 
   initCartLocalStorage(){
-    const initalCart={items:[]};
-    
-    const initialCartJson=JSON.stringify(initalCart);
-    localStorage.setItem(CART_KEY,initialCartJson)
+    const cart:Cart=this.getCart();   //Se guarda lo que habia en el carrito con anterioridad
+    if(!cart){                        //Si no hay nada en el carrito se inicia por primera vez
+      const initalCart={items:[]};
+      
+      const initialCartJson=JSON.stringify(initalCart);
+      localStorage.setItem(CART_KEY,initialCartJson)
+    }
   }
 
-  setCartItem(cartItem:CartItem):Cart{
-    const cart:Cart=JSON.parse(localStorage.getItem(CART_KEY));
-    cart.items.push(cartItem);
+  emptyCart() {
+    const intialCart = {
+      items: []
+    };
+    const intialCartJson = JSON.stringify(intialCart);
+    localStorage.setItem(CART_KEY, intialCartJson);
+    this.cart$.next(intialCart);
+  }
+
+  getCart():Cart{
+    const cartJson:string=localStorage.getItem(CART_KEY);
+    const cart:Cart=JSON.parse(cartJson);
     return cart;
+  }
+
+  setCartItem(cartItem:CartItem, updateCartItem?: boolean):Cart{
+    const cart:Cart=this.getCart();
+    const cartItemsExist=cart.items.find((item)=>item.productId===cartItem.productId);
+    if(cartItemsExist){
+      cart.items.map((item)=>{
+        if(item.productId===cartItem.productId){
+          if (updateCartItem) {
+            item.quantity = cartItem.quantity;
+          } else {
+            //item.quantity = item.quantity + cartItem.quantity;
+            item.quantity+=cartItem.quantity;   //Se agrega 1 cantidad al item seleccionado
+          }
+          return item;
+        }
+      })
+    }else{
+      cart.items.push(cartItem);
+    }
+    const cartJson=JSON.stringify(cart);
+    localStorage.setItem(CART_KEY,cartJson)
+    return cart;
+  }
+
+  deleteCartItem(productId: string) {
+    const cart = this.getCart();
+    const newCart = cart.items.filter((item) => item.productId !== productId);
+
+    cart.items = newCart;
+
+    const cartJsonString = JSON.stringify(cart);
+    localStorage.setItem(CART_KEY, cartJsonString);
+
+    this.cart$.next(cart);
   }
 }

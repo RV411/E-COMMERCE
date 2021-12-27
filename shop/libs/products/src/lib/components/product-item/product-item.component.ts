@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../models/product';
-import { CartService } from '@bluebits/orders';
-import { CartItem } from '../../../../../orders/src/lib/models/cart';
+import { CartService,CartItem } from '@bluebits/orders';
 
 @Component({
   selector: 'products-product-item',
@@ -17,7 +16,10 @@ export class ProductItemComponent implements OnInit {
   ngOnInit(): void {}
 
   addItemCart(){
-    const cartItem:CartItem;
-    this.cartService.setCartItem();
+    const cartItem:CartItem={
+      productId:this.product.id,
+      quantity:1
+    };
+    this.cartService.setCartItem(cartItem);
   }
 }
