@@ -1,16 +1,16 @@
 <div class="order-summary">
-  <h3>Order Summary</h3>
+  <h3>Resumen de la Orden</h3>
   <div class="summary-price">
-    <span>Items Price</span>
+    <span>Precio de articulos</span>
     <span>{{ totalPrice | currency }}</span>
   </div>
   <div class="summary-price">
-    <span>Packing & Shipping</span>
-    <span class="free">Free</span>
+    <span>Envio y empaque</span>
+    <span class="free">Gratis</span>
   </div>
   <div class="to-checkout">
     <div class="summary-price">
-      <span>Total Price</span>
+      <span>Precio Total</span>
       <span>{{ totalPrice | currency }}</span>
     </div>
     <div class="checkout-button" *ngIf="!isCheckout">

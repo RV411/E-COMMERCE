@@ -37,11 +37,11 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
       if (cart) {
         cart.items.map((item) => {
           this.ordersService
-            // .getProduct(item.productId)
-            // .pipe(take(1))
-            // .subscribe((product) => {
-            //   this.totalPrice += product.price * item.quantity;
-            // });
+            .getProduct(item.productId)
+            .pipe(take(1))
+            .subscribe((product) => {
+              this.totalPrice += product.price * item.quantity;
+            });
         });
       }
     });
