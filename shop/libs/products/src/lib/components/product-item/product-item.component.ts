@@ -17,7 +17,7 @@ export class ProductItemComponent implements OnInit {
 
   addItemCart(){
     const cartItem:CartItem={
-      productId:this.product.id,
+      productId:this.product._id,
       quantity:1
     };
     this.cartService.setCartItem(cartItem);

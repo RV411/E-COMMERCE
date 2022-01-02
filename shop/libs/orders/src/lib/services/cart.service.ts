@@ -39,25 +39,25 @@ export class CartService {
   }
 
   setCartItem(cartItem:CartItem, updateCartItem?: boolean):Cart{
-    const cart:Cart=this.getCart();
-    const cartItemsExist=cart.items.find((item)=>item.productId===cartItem.productId);
-    if(cartItemsExist){
+    const cart = this.getCart();
+    const cartItemExist = cart.items.find((item) => item.productId === cartItem.productId);
+    if (cartItemExist) {
       cart.items.map((item)=>{
         if(item.productId===cartItem.productId){
           if (updateCartItem) {
-            item.quantity = cartItem.quantity;
+            item.quantity = cartItem.quantity;// Se resta la cantidad
           } else {
-            //item.quantity = item.quantity + cartItem.quantity;
-            item.quantity+=cartItem.quantity;   //Se agrega 1 cantidad al item seleccionado
+            item.quantity=item.quantity+cartItem.quantity;   //Se agrega 1 cantidad al item seleccionado
           }
           return item;
         }
-      })
+      });
     }else{
       cart.items.push(cartItem);
     }
     const cartJson=JSON.stringify(cart);
     localStorage.setItem(CART_KEY,cartJson)
+    this.cart$.next(cart);
     return cart;
   }
 

@@ -34,14 +34,14 @@ export class CheckoutPageComponent implements OnInit {
 
   private _initCheckoutForm() {
     this.checkoutFormGroup = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.email, Validators.required]],
-      phone: ['', Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-      zip: ['', Validators.required],
-      apartment: ['', Validators.required],
-      street: ['', Validators.required]
+      // name: ['name', Validators.required],
+      // email: ['email@mail.com', [Validators.email, Validators.required]],
+      phone: ['1111111111', Validators.required],
+      city: ['mexico', Validators.required],
+      country: ['MX', Validators.required],
+      zip: ['11123', Validators.required],
+      apartment: ['unouno', Validators.required],
+      street: ['dosdos', Validators.required]
     });
   }
 
@@ -66,6 +66,7 @@ export class CheckoutPageComponent implements OnInit {
   placeOrder() {
     this.isSubmitted = true;
     if (this.checkoutFormGroup.invalid) {
+      
       return;
     }
 
@@ -82,8 +83,13 @@ export class CheckoutPageComponent implements OnInit {
       dateOrdered: `${Date.now()}`
     };
 
+    //console.log(order);
+
     this.ordersService.createOrder(order).subscribe(
-      () => {
+      (iten) => {
+    console.log('Gio');
+    console.log(order);
+
         //redirect to thank you page // payment
         this.cartService.emptyCart();
         this.router.navigate(['/success']);

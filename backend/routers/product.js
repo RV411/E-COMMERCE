@@ -174,7 +174,7 @@ router.put('/gallery-images/:id',
         let imagesPaths=[];
         
         if(files){
-            files.map(file=>{
+            files.map((file)=>{
                 imagesPaths.push(`${basePath}${file.fileName}`);
             })
         }

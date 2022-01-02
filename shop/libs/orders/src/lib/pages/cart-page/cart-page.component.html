@@ -3,7 +3,7 @@
     <div class="p-col-8">
       <div>
         <p-button
-          label="Continue shopping"
+          label="Continuar Comprando"
           icon="pi pi-arrow-left"
           (onClick)="backToShop()"
         ></p-button>
@@ -12,7 +12,7 @@
         <h4>My Cart: {{ cartCount }} Item(s)</h4>
       </div>
       <div class="cart-shipping p-mb-5">
-        Shipping after the payment, Delivery time : 1 to 4 working days
+        Se entrega despues del pago, Entregas de 1 a 4 dias.
       </div>
       <div class="cart-item p-mb-5" *ngFor="let cartItem of cartItemsDetailed">
         <div class="p-grid p-fluid">
@@ -31,7 +31,7 @@
               <p-inputNumber
                 mode="decimal"
                 [showButtons]="true"
-                [inputId]="cartItem.product.id"
+                [inputId]="cartItem.product._id"
                 [min]="1"
                 [max]="100"
                 [(ngModel)]="cartItem.quantity"
@@ -41,9 +41,7 @@
             </div>
             <div class="cart-item-subtotal">
               Subtotal:
-              <span class="cart-item-subtotal-value">{{
-                cartItem.product.price * cartItem.quantity | currency
-              }}</span>
+              <span class="cart-item-subtotal-value">{{cartItem.product.price * cartItem.quantity | currency}}</span>
             </div>
           </div>
         </div>

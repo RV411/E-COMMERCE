@@ -36,9 +36,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   addProductToCart() {
     const cartItem:CartItem={
-      productId:this.product.id,
+      productId:this.product._id,
       quantity:this.quantity
-    }
+    };
     this.cartService.setCartItem(cartItem);
   }
 
