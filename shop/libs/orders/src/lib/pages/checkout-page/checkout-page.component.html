@@ -6,7 +6,7 @@
     <div class="p-col-8">
       <form [formGroup]="checkoutFormGroup">
         <div class="p-fluid p-formgrid p-grid">
-          <!-- <div class="p-field p-col-4">
+          <div class="p-field p-col-4">
             <label for="name">Nombre</label>
             <input formControlName="name" id="name" type="text" pInputText />
             <small *ngIf="checkoutForm.name.invalid && isSubmitted" class="p-error"
@@ -20,7 +20,7 @@
               ><span *ngIf="checkoutForm.email.errors.required">Se requiere un email</span>
               <span *ngIf="checkoutForm.email.errors.email">email invalid</span></small
             >
-          </div> -->
+          </div>
           <div class="p-field p-col-4">
             <label for="color">Telefono</label><br />
             <p-inputMask

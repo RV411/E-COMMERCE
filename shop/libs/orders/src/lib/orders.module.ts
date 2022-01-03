@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { CarIconComponent } from './components/car-icon/car-icon.component';
@@ -17,28 +16,14 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputMaskModule } from 'primeng/inputmask';
 import { DropdownModule } from 'primeng/dropdown';
-
-const routes: Routes = [
-  {
-    path: 'cart',
-    component: CartPageComponent
-  },
-  {
-    path: 'checkout',
-    component: CheckoutPageComponent
-  },
-  {
-    path: 'success',
-    component: ThankYouComponent
-  }
-];
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
   imports: [
+    AppRoutingModule,
     CommonModule,
     BadgeModule,
-    RouterModule.forChild(routes),
     ButtonModule,
     InputNumberModule,
     FormsModule,

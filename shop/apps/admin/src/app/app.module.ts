@@ -12,6 +12,8 @@ import { ProductsListComponent } from './pages/products/products-list/products-l
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -85,6 +87,8 @@ const UX_MODULE = [
     FormsModule,
     ReactiveFormsModule,
     UsersModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     ...UX_MODULE
   ],
   providers: [
