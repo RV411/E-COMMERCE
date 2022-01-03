@@ -41,6 +41,7 @@ import { OrdersService } from '@bluebits/orders';
 import { UsersService,UsersModule,JwtInterceptor ,AuthService,LocalstorageService} from '@bluebits/users';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AppRoutingModule } from './app-routing.module';
+import { NgxStripeModule } from 'ngx-stripe';
 
 
 const UX_MODULE = [
@@ -89,6 +90,7 @@ const UX_MODULE = [
     UsersModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    NgxStripeModule.forRoot('pk_test_51KDj1AF8EYtUzjcfe6z9XQS3CUrPaxKri7epYj0Yy2XR6lbNRVV9NkPXMsVFrwRrSaEbKEqpqZtgcUjQJjNlTlBT00Bv38Zgwg'),
     ...UX_MODULE
   ],
   providers: [

@@ -21,6 +21,7 @@ import { NavComponent } from './shared/nav/nav.component';
 import { AccordionModule } from 'primeng/accordion';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { NgxStripeModule } from 'ngx-stripe';
 
 const routes: Routes = [{ path: '', component: HomePageComponent }];
 
@@ -46,6 +47,7 @@ const routes: Routes = [{ path: '', component: HomePageComponent }];
     RouterModule.forRoot(routes),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    NgxStripeModule.forRoot('pk_test_51KDj1AF8EYtUzjcfe6z9XQS3CUrPaxKri7epYj0Yy2XR6lbNRVV9NkPXMsVFrwRrSaEbKEqpqZtgcUjQJjNlTlBT00Bv38Zgwg')
   ],
   providers: [
     MessageService,

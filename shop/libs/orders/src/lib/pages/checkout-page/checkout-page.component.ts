@@ -9,6 +9,7 @@ import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { StripeService } from 'ngx-stripe';
 
 @Component({
   selector: 'orders-checkout-page',
@@ -92,19 +93,25 @@ export class CheckoutPageComponent implements OnInit , OnDestroy{
       dateOrdered: `${Date.now()}`
     };
 
-    //console.log(order);
+    this.ordersService.cacheOrderData(order);
 
-    this.ordersService.createOrder(order).subscribe(
-      (iten) => {
-
-        //redirect to thank you page // payment
-        this.cartService.emptyCart();
-        this.router.navigate(['/success']);
-      },
-      () => {
-        //display some message to user
+    this.ordersService.createChekoutSession(this.orderItems).subscribe((error)=>{
+      if(error){
+        console.log('error');
       }
-    );
+    });
+    
+    // this.ordersService.createOrder(order).subscribe(
+    //   (iten) => {
+
+    //     //redirect to thank you page // payment
+    //     this.cartService.emptyCart();
+    //     this.router.navigate(['/success']);
+    //   },
+    //   () => {
+    //     //display some message to user
+    //   }
+    // );
   }
 
   get checkoutForm() {
