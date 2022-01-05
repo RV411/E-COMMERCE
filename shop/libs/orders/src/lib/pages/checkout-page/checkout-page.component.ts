@@ -9,7 +9,6 @@ import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { StripeService } from 'ngx-stripe';
 
 @Component({
   selector: 'orders-checkout-page',

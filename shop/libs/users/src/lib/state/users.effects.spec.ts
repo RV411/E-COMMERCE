@@ -1,41 +1,40 @@
-import { TestBed, async } from '@angular/core/testing';
+import { Injectable } from '@angular/core';
+import { createEffect, Actions, ofType } from '@ngrx/effects';
 
-import { Observable } from 'rxjs';
-
-import { provideMockActions } from '@ngrx/effects/testing';
-import { provideMockStore } from '@ngrx/store/testing';
-
-import { NxModule, DataPersistence } from '@nrwl/angular';
-import { hot } from '@nrwl/angular/testing';
-
-import { UsersEffects } from './users.effects';
 import * as UsersActions from './users.actions';
+import { catchError, concatMap, map } from 'rxjs/operators';
+import { LocalstorageService } from '../services/localstorage.service';
+import { of } from 'rxjs';
+import { UsersService } from '../services/users.service';
 
-describe('UsersEffects', () => {
-  let actions: Observable<any>;
-  let effects: UsersEffects;
+@Injectable()
+export class UsersEffects {
+  buildUserSession$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.buildUserSession),
+      concatMap(() => {
+        if (this.localstorageService.isValidToken()) {
+          const userId = this.localstorageService.getUserIdFromToken();
+          if (userId) {
+            return this.usersService.getUser(userId).pipe(
+              map((user) => {
+                return UsersActions.buildUserSessionSuccess({ user: user });
+              }),
+              catchError(() => of(UsersActions.buildUserSessionFailed()))
+            );
+          } else {
+            return of(UsersActions.buildUserSessionFailed());
+          }
+        } else {
+          return of(UsersActions.buildUserSessionFailed());
+        }
+      })
+    )
+  );
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [NxModule.forRoot()],
-      providers: [
-        UsersEffects,
-        DataPersistence,
-        provideMockActions(() => actions),
-        provideMockStore()
-      ]
-    });
-
-    effects = TestBed.get(UsersEffects);
-  });
-
-  describe('init$', () => {
-    it('should work', () => {
-      actions = hot('-a-|', { a: UsersActions.init() });
-
-      const expected = hot('-a-|', { a: UsersActions.loadUsersSuccess({ users: [] }) });
-
-      expect(effects.init$).toBeObservable(expected);
-    });
-  });
-});
+  constructor(
+    private actions$: Actions,
+    private localstorageService: LocalstorageService,
+    private usersService: UsersService
+  ) {}
+}

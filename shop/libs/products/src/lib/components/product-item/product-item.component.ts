@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from '../../models/product';
 import { CartService,CartItem } from '@bluebits/orders';
 
@@ -8,12 +8,10 @@ import { CartService,CartItem } from '@bluebits/orders';
   styles: []
 })
 
-export class ProductItemComponent implements OnInit {
+export class ProductItemComponent{
   @Input() product: Product;
 
   constructor(private cartService:CartService) {}
-
-  ngOnInit(): void {}
 
   addItemCart(){
     const cartItem:CartItem={
