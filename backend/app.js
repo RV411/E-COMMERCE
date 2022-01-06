@@ -33,7 +33,11 @@ app.use(`${api}/user`,userRouter)
 
 //*Connection
 // mongoose.connect('mongodb+srv://eshop:eshop@cluster0.tgelg.mongodb.net/eshop?retryWrites=true&w=majority');
-mongoose.connect(process.env.CONNECTION_STRING)
+mongoose.connect(process.env.CONNECTION_STRING,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    dbName:process.env.DB_Name
+})
 .then(()=>{
     console.log('Base de datos exitosa');
 })
@@ -42,6 +46,7 @@ mongoose.connect(process.env.CONNECTION_STRING)
 })
 
 //*Port
-app.listen(3000,()=>{
+const PORT=process.env.PORT || 3000;
+app.listen(PORT,()=>{
     console.log('server is running http://localhost:3000');
 })
